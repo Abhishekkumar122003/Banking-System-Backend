@@ -6,8 +6,9 @@ const userModel = require("../models/user.model");
      routes that hit here will be 
      "POST - api/v0/auth/register"
 */
- function userRegisterController(req , res){
+ async function userRegisterController(req , res){
     const {email , name , password}= req.body;
+
 }
 
 
