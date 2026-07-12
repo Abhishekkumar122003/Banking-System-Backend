@@ -27,7 +27,7 @@
     }    
 )
 
-userSchema.pre("save", async function(next){ // this function checks whether the user changed their password previously or not
+userSchema.pre("save", async (next)=>{ // this function checks whether the user changed their password previously or not
     if(!this.isModified(password)){
         return next(); //here if password is not change simply exicute the next function
     }
@@ -38,3 +38,14 @@ userSchema.pre("save", async function(next){ // this function checks whether the
 
 })
 
+//Adding the  compare METHOD for comparing the password's hash is matching or not
+
+userSchema.method.comparePassword = async (password)=>{
+    return await bcrypt.compare(password , this.password);
+}
+
+const userModel = mongoose.model("user" , userSchema);
+
+module.exports= {
+    userModel
+}
