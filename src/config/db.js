@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
     })
     .catch(err =>{
         console.log("ERROR connecting to DataBase");
-        process.exit(1); // this line exsecute when the ".catch" block run mean some ERROR happend during connecting to DB
+        process.exit(1); // this line exsecute when the ".catch" block run mean some ERROR happend during connecting to DB . so it stop the server
     })
  }
 
