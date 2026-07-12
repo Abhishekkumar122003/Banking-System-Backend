@@ -1,6 +1,6 @@
   const mongoose = require('mongoose');
 
-  const userSchema = mongoose.Schema({
+  const userSchema = new mongoose.Schema({
     email: {
         type:String,
         required:[ true, "Email is required for creating the User" ],
@@ -26,3 +26,15 @@
         timestemp:true
     }    
 )
+
+userSchema.pre("save", async function(next){ // this function checks whether the user changed their password previously or not
+    if(!this.isModified(password)){
+        return next(); //here if password is not change simply exicute the next function
+    }
+    //if password doo changed first=> hash it and then save it in password 
+    const hash = await bcrypt.hash(this.password , 11);
+    this.password= hash;
+    return next();
+
+})
+
