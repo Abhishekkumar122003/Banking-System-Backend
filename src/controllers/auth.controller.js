@@ -28,7 +28,15 @@ async function userRegisterController(req , res){
   })
   // console.log(process.env.JWT_SECRET);
    const token = jwt.sign({userId: user._id} , process.env.JWT_SECRET , {expiresIn: "3d"});
-
+  res.cookies("token", token);
+  res.status(201).json({
+    user:{
+      _id:user._id,
+      email:user.email,
+      name:user.name
+    },
+    token
+  }); //send this status code accordding to REST api when some resource are creat due to user request => send=>201 
 }
 
 
