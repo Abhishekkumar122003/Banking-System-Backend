@@ -7,7 +7,7 @@ const authRouter = require('./routes/auth.routes')
 const app = express();
 app.use(express.json()); // it enables express to read the "req.body" data
 
-
+    
 app.use("api/v0/auth" , authRouter)
 
 
