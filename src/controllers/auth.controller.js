@@ -1,7 +1,7 @@
 const userModel = require("../models/user.model");
 // require('dotenv').config();
 const jwt = require('jsonwebtoken')
-console.log("hii")
+console.log(userModel)
 
 /** 
  *   - user register controller
@@ -9,12 +9,13 @@ console.log("hii")
  *  - "POST - api/v0/auth/register"
 */
 async function userRegisterController(req , res){
+  console.log("hii there ")
   const {email , name , password}= req.body;
-  
+  console.log(email , name, password);
   // add all the logic required for signup
   const isUserExist= await userModel.findOne({
     email,
-    name
+    name 
   });
   if(isUserExist){
     return res.status(402).json({
@@ -28,7 +29,7 @@ async function userRegisterController(req , res){
   })
   // console.log(process.env.JWT_SECRET);
    const token = jwt.sign({userId: user._id} , process.env.JWT_SECRET , {expiresIn: "3d"});
-  res.cookies("token", token);
+  res.cookie("token", token);
   res.status(201).json({
     user:{
       _id:user._id,
