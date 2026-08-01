@@ -57,7 +57,7 @@ async function userLoginController(req, res) {
         message:"User with this Creadential does not Exist"
       })
     }
-    //if user Exist =>check the Possword correctness.Valid
+    //if user Exist =>check the Possword correctness.V alid
     // console.log("yaha pht rha hai")
     const isValid = await isUserExist.comparePassword(password);
     // console.log("yaha tk pht rha hai")
