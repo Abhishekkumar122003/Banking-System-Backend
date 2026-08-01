@@ -51,7 +51,7 @@ async function userRegisterController(req , res){
 
 async function userLoginController(req, res) {
     const {email , password} = req.body;
-    const isUserExist = await userModel.findOne({email});
+    const isUserExist = await userModel.findOne({email}).select("+password");
     //if user not exist
     if(!isUserExist){
       return res.status(401).json({
@@ -59,8 +59,34 @@ async function userLoginController(req, res) {
       })
     }
     //if user Exist =>check the Possword correctness.Valid
-    const inValide = await userModel.comparePassword(password);
+    console.log("yaha pht rha hai")
+    const isValid = await isUserExist.comparePassword(password);
+    console.log("yaha tk pht rha hai")
+    //is Password is invalid
+    if(!isValid){
+      return res.status(401).json({
+        message:"The Password is inCorrect"
+      })
+    }
+    //if Passowrd is correct
+    const token = jwt.sign({
+      userId:isUserExist._id
+    },
+    process.env.JWT_SECRET,
+    {expiresIn:"3d"}
+    )
+    res.cookie("token" , token);
+    res.status(201).json({
+      user: {
+      _id:isUserExist._id,
+      name:isUserExist.name,
+      email:isUserExist.email
+    },
+     token
+})
      
 }
 
-module.exports= {userRegisterController};
+module.exports= {userRegisterController,
+  userLoginController
+};
