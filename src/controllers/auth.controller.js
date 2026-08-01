@@ -43,4 +43,24 @@ async function userRegisterController(req , res){
 }
 
 
+/**
+ * - user login controller
+ * - routes that hits here will be
+ * - /api/auth/login
+ */
+
+async function userLoginController(req, res) {
+    const {email , password} = req.body;
+    const isUserExist = await userModel.findOne({email});
+    //if user not exist
+    if(!isUserExist){
+      return res.status(401).json({
+        message:"User with this Creadential does not Exist"
+      })
+    }
+    //if user Exist =>check the Possword correctness.Valid
+    const inValide = await userModel.comparePassword(password);
+     
+}
+
 module.exports= {userRegisterController};

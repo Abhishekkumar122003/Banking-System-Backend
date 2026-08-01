@@ -41,6 +41,7 @@ userSchema.pre("save", async function (){ // this function checks whether the us
 //Adding the  compare METHOD for comparing the password's hash is matching or not 
 // or to orr  yee method mera userSchema mai attached hojaiga. here "method" keyword used to create the method and attached to the main object
 userSchema.methods.comparePassword = async function (password){
+    
     console.log(this + "jksdfciwegifsdcv")
     return await bcrypt.compare(password , this.password);
 }
