@@ -58,9 +58,9 @@ async function userLoginController(req, res) {
       })
     }
     //if user Exist =>check the Possword correctness.Valid
-    console.log("yaha pht rha hai")
+    // console.log("yaha pht rha hai")
     const isValid = await isUserExist.comparePassword(password);
-    console.log("yaha tk pht rha hai")
+    // console.log("yaha tk pht rha hai")
     //is Password is invalid
     if(!isValid){
       return res.status(401).json({
