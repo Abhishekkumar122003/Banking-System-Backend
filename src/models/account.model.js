@@ -21,7 +21,7 @@ const accountSchema = new mongoose.Schema({
         timestamps:true
     });
 
-    accountModel.index({ user: 1, status: 1}); // this is compound index, this is used when i search using "user" or "status"
+    accountModel.index({ user: 1, status: 1}); // this is compound index, this is used when we try to find on the basis of "user" and "status"
 
 const accountModel = mongoose.model("account", accountSchema);
 
