@@ -39,4 +39,11 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-module.exports = sendEmail;
+async function sendRegistrationEmail(userEmail , name){
+    const subject = 'wellcome to Bank-transection-=system';
+    const text = `hello ${name}, \n\n Thank you for registring at Bank-transection-system. We're excited to have you on Board!.`
+    const html = `<p>Hello ${name}, </p> <p> Thank you to registering at Bank-transection-system. We're excited to have you on Board! </p> <p> Best regards.<br> The Bank-transection-team </p>`;
+    await sendEmail(userEmail , subject, text , html);
+}
+
+module.exports= {sendRegistrationEmail};
