@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model");
 // require('dotenv').config();
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const emailService = require("../services/email.service"); //import the email services for email related word
 
 /** 
  *   - user register controller
@@ -39,6 +40,9 @@ async function userRegisterController(req , res){
     },
     token
   }); //send this status code accordding to REST api when some resource are creat due to user request => send=>201 
+
+  await emailService.sendRegistrationEmail(user.email)
+
 }
 
 
