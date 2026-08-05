@@ -4,7 +4,7 @@ const accountSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"user",
         required:[true , "Account must be associated with a user"],
-        index:true
+        index:true                   // this index is implemented using 
     },
     status: {
         enum:{
@@ -20,6 +20,8 @@ const accountSchema = new mongoose.Schema({
     }, {
         timestamps:true
     });
+
+    accountModel.index({ user: 1, status: 1}); // this is compound index, this is used when i search using "user" or "status"
 
 const accountModel = mongoose.model("account", accountSchema);
 
