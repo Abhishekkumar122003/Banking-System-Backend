@@ -11,7 +11,7 @@ app.use(express.json()); // it enables express to read the "req.body" data
 app.use(cookieParser()); // now you can use this in any folder 
 
 /**
- * -Routes
+ * -Routes required
  */
 const authRouter = require('./routes/auth.routes') 
 const accountRouter = require("./routes/account.routes")
@@ -19,7 +19,8 @@ const accountRouter = require("./routes/account.routes")
 /**
  * -Use Routes
  */
-app.use("/api/auth" , authRouter)
+app.use("/api/auth" , authRouter);
+app.use("/api/account" , accountRouter);
 
 
 //import the server instance (app)
