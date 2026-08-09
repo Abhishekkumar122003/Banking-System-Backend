@@ -5,8 +5,9 @@ const userModel = require("../models/user.model");
 
 async function authMiddleware(req, res, next){
     const token = req.cookies.token || req.header.autherization?.split(" ")[1];
-    console.log("hi there")
-    console.log(token)
+    
+    // console.log(token)
+    
     /*- if token is not present */
     if(!token){
         return res.status(400).json({
