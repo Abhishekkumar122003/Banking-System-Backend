@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+
+
 const accountSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
@@ -7,22 +9,24 @@ const accountSchema = new mongoose.Schema({
         index:true                   // this index is implemented using 
     },
     status: {
+        type:String,
         enum:{
             values:["ACTIVE" , "FROZEN" ,"CLOSED"],
             message:"status can be either ACTIVE, FROZEN , OR CLOSED",
-            defoult:"ACTIVE"
-        }
+        },
+        default:"ACTIVE"
+
     },
     currency:{
         type:String,
         required:[true, "Currency is required for creating an account."],
-        defoult:"INR"
+        default:"INR"
     }
     }, {
         timestamps:true
     });
 
-    accountModel.index({ user: 1, status: 1}); // this is compound index, this is used when we try to find on the basis of "user" and "status"
+    accountSchema.index({ user: 1, status: 1}); // this is compound index, this is used when we try to find on the basis of "user" and "status"
 
 const accountModel = mongoose.model("account", accountSchema);
 
