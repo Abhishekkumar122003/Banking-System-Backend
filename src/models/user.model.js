@@ -23,7 +23,7 @@
     
   } , 
     {
-        timestemp:true
+        timestemps:true
     }    
 )
 // hey i change password=>"password" and delete next() and it worked why and what problems are present before 
