@@ -6,6 +6,8 @@ async function connectToDB(){
      mongoose.connect(process.env.MONGODB_URL)
     .then(()=>{
         console.log("Server is connected to DataBase");
+        console.log("Database:", mongoose.connection.name);
+        console.log("Host:", mongoose.connection.host);
     })
     .catch(err =>{
         console.log("ERROR connecting to DataBase");
