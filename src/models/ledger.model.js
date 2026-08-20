@@ -33,4 +33,6 @@ const transactionModel = require("./transaction.model");
 
         // logic for preventing from modification(Delete, UPDATE,FIND ect) of LEDGER 
 
- 
+ function preventLedgerModification(){
+    
+ }
