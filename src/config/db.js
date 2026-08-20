@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 // console.log("hi theresdsdsdk");
-console.log(process.env.MONGODB_URL);
+// console.log(process.env.MONGODB_URL);
 async function connectToDB(){
     
      mongoose.connect(process.env.MONGODB_URL)
