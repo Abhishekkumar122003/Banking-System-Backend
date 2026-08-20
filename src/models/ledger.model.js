@@ -34,5 +34,11 @@ const transactionModel = require("./transaction.model");
         // logic for preventing from modification(Delete, UPDATE,FIND ect) of LEDGER 
 
  function preventLedgerModification(){
-    
+    throw new Error("Ledger entries are immutable and cannot be modified or Deleted");
  }
+ ledgerSchema.pre('findOneAndUpdate',preventLedgerModification)
+ ledgerSchema.pre('deleteMany',preventLedgerModification)
+ ledgerSchema.pre('deleteOne',preventLedgerModification)
+ ledgerSchema.pre('updateOne',preventLedgerModification)
+ ledgerSchema.pre('remove',preventLedgerModification)
+ ledgerSchema.pre('validate',preventLedgerModification)
