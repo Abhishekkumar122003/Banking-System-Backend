@@ -42,6 +42,8 @@ const transactionModel = require("./transaction.model");
  ledgerSchema.pre('updateOne',preventLedgerModification)
  ledgerSchema.pre('remove',preventLedgerModification)
  ledgerSchema.pre('validate',preventLedgerModification)
+ ledgerSchema.pre('findOneAndReplace',preventLedgerModification)
+ ledgerSchema.pre('findOneAndDelete',preventLedgerModification)
 
 
  const ledgerModel = mongoose.model("ledger", ledgerSchema);
