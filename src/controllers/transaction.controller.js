@@ -65,6 +65,12 @@ async function createTransaction(req, res){
      * step-3 Check Account Status
      */
     
+    if(fromUserAccount.status !== "ACTIVE" || toUserAccount !== "ACTIVE"){
+        return res.status(400).json({
+            message:"Both fromAccount and  toAccount must be ACTIVE to process transaction"
+        })
+    }
+    
 
     }
 
