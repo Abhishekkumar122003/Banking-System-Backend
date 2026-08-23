@@ -29,7 +29,41 @@ async function createTransaction(req, res){
         })
     }
 
+    /**
+     * step-2 validate idempotencyKey
+     */
+    const isTransactionAlreadyExists = await transactionModel.findOne({
+        idempotencyKey:idempotencyKey
+    })
     
+    if(isTransactionAlreadyExists){
+
+        if(isTransactionAlreadyExists.status === "COMPLETE"){
+            return res.status(200).json({
+                message:"Transaction already processed",
+                transaction : isTransactionAlreadyExists
+            })
+        }
+        if(isTransactionAlreadyExists.status === "PENDING"){
+            return res.status(200).json({
+                message:"Transaction is still in processing"
+            })
+        }
+        if(isTransactionAlreadyExists.status === "FAILED"){
+            return res.status(500).json({
+                message:"Transaction is failed, please retry"
+            })
+        }
+        if(isTransactionAlreadyExists.status === "REVERSED"){
+            return res.status(500).json({
+                message:"Transaction has been reversed, please retry"
+            })
+        }
+    }
+
+    /**
+     * step-3 Check Account Status
+     */
     
 
     }
