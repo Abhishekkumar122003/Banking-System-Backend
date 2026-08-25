@@ -71,5 +71,8 @@ async function createTransaction(req, res){
         })
     }
     
+    /*
+     * step-4 Derive sender balance from ledger
+     */
 
     }

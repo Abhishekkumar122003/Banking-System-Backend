@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const ledger = require("./ledger.model")
 
 const accountSchema = new mongoose.Schema({
     user:{
@@ -27,7 +27,9 @@ const accountSchema = new mongoose.Schema({
     });
 
     accountSchema.index({ user: 1, status: 1}); // this is compound index, this is used when we try to find on the basis of "user" and "status"
-
+    accountSchema.methods.getBalance =async function(){
+        const 
+    }
 const accountModel = mongoose.model("account", accountSchema);
 
 module.exports=accountModel;
