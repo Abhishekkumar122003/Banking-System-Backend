@@ -15,7 +15,7 @@ const transactionModel = require("./transaction.model");
         immutable:true
     },
     transaction:{
-        typr:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         required:[true, "Ledger must be associated with the Transaction"],
         immutable:true,
         index:true
