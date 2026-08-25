@@ -20,11 +20,12 @@ const mongoose = require("mongoose");
 async function createTransaction(req, res){
 
     const {fromUserAccount, toUserAccount, amount, idempotencyKey} = req.body;
+
     /**
      * step-1 validate request
      */
     if(!fromUserAccount || !toUserAccount || !amount || !idempotencyKey){
-        res.status(400).json({
+        return res.status(400).json({
             message:"FromUserAccount, toUserAccount, Amount and idempotencyKey are required"
         })
     }
@@ -64,20 +65,29 @@ async function createTransaction(req, res){
     /**
      * step-3 Check Account Status
      */
-    
-    if(fromUserAccount.status !== "ACTIVE" || toUserAccount !== "ACTIVE"){
+    const senderAccount = await accountModel.findById(fromUserAccount);
+    const reciverAccount = await accountModel.findById(toUserAccount);    
+
+    //check if the senderAccount and reciverAccount exists or not
+    if(!senderAccount || !reciverAccount){
+        return res.status(404).json({
+            message:`One or both Account not found`
+        });
+    }
+
+    if(senderAccount.status !== "ACTIVE" || reciverAccount !== "ACTIVE"){
         return res.status(400).json({
-            message:"Both fromAccount and  toAccount must be ACTIVE to process transaction"
+            message:"Both senderAccount and  reciverAccount must be ACTIVE to process transaction"
         })
     }
     
     /*
      * step-4 Derive sender balance from ledger
      */
-    const balance =await fromUserAccount.getBalance()
-    
+
+    const balance = await senderAccount.getBalance()
     if(balance < amount){
-        res.status(400).json({
+        return res.status(400).json({
             message:`Tnsufficiant balance in fromAccount. Current balance is ${balance}. Requested balance is ${amount}`
         })
     }
@@ -85,6 +95,6 @@ async function createTransaction(req, res){
     /*
      *step-5 Create Transaction 
      */
-
+    
 
     }

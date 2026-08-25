@@ -1,3 +1,8 @@
+/**
+ * @typedef {Object} IAccountMethods
+ * @property {() => Promise<number>} getBalance
+ */
+
 const mongoose = require("mongoose");
 const ledgerModel = require("./ledger.model");
 
@@ -36,8 +41,8 @@ const accountSchema = new mongoose.Schema({
                     totalCredit:{
                         $sum:{
                             $cond:[
-                                {$eq:["$type", "$Credit"]},
-                                "amount",
+                                {$eq:["$type", "$CREDIT"]},
+                                "$amount",
                                 0
                             ]
                         }
@@ -45,8 +50,8 @@ const accountSchema = new mongoose.Schema({
                     totalDebit:{
                         $sum:{
                             $cond:[
-                                {$eq:["$type", "$Debit"]},
-                                "amount",
+                                {$eq:["$type", "$DEBIT"]},
+                                "$amount",
                                 0
                             ]
                         }
@@ -57,7 +62,7 @@ const accountSchema = new mongoose.Schema({
                 $project:{
                     _id:0,
                     balance:{
-                        $substract:["$totalCredit", "$totalDebit"]
+                        $subtract:["$totalCredit", "$totalDebit"]
 
                     }
                 }
