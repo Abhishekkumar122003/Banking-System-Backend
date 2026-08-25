@@ -60,7 +60,7 @@ async function createTransaction(req, res){
             })
         }
     }
-
+ 
     /**
      * step-3 Check Account Status
      */
@@ -73,5 +73,3 @@ async function createTransaction(req, res){
     
 
     }
-
-    //resume from 2:12:01
