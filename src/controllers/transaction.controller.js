@@ -233,7 +233,13 @@ async function creteInitialFundsTransaction(req, res) {
     transaction.status = "COMPLETED";
     await transaction.save({ session });
 
-    
+    await session.commitTransaction();
+    session.endSession()
+
+    return res.status(201).json({
+        message: "Initial funds transaction completed succeddfully ",
+        transaction: transaction
+    })
 
     }
 
