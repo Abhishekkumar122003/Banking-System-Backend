@@ -21,7 +21,7 @@ const transactionSchema = new mongoose.Schema({
         },
         default:"PENDING"
     },
-    account:{
+    amount:{
         type:Number,
         required:[true,"Amount is required for creating the transaction"],
         min:[0, "Transaction amount cannot be negative"]

@@ -72,4 +72,4 @@ const accountSchema = new mongoose.Schema({
     }
 const accountModel = mongoose.model("account", accountSchema);
 
-module.exports=accountModel;
+module.exports=accountModel;                                                                                                                            
