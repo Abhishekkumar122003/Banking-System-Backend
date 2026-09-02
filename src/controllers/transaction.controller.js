@@ -165,6 +165,9 @@ async function createTransaction(req, res){
         toUserAccount
     )
 
-   
+    return res.status(201).json({
+        message:"Transaction completed successfully",
+        transaction:transaction
+    })
 
     }
