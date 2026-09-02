@@ -20,7 +20,12 @@
         minlength:[7, "Password should be minimum 6 characters"],
         select: false
     },
-    
+    systemUser: {
+        type: Boolean,
+        default: false,
+        immutable: true,
+        select: false
+    }
   } , 
     {
         timestemps:true
