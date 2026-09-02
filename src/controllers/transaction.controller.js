@@ -171,3 +171,7 @@ async function createTransaction(req, res){
     })
 
     }
+
+module.exports = {
+    createTransaction
+ }
