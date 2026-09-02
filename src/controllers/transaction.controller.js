@@ -92,11 +92,26 @@ async function createTransaction(req, res){
         })
     }
     
-    /*
-     *step-5 Create Transaction (PENDING)
-     */
     
+   
     
+    let transaction;
+    try {
 
+            /*
+             *step-5 Create Transaction (PENDING)
+            */
+         
+    const session = await mongoose.startSession();
+        session.startTransaction();
+    
+    transaction = await transactionModel.create([{
+        fromAccount:fromUserAccount,
+        toAccount:toUserAccount,
+        status:"PENDIN",
+        amount:amount,
+        idempotencyKey:idempotencyKey
+    }], {session});
 
+}
     }
