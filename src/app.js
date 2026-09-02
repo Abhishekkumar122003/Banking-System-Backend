@@ -15,13 +15,13 @@ app.use(cookieParser()); // now you can use this in any folder
  */
 const authRouter = require('./routes/auth.routes') 
 const accountRouter = require("./routes/account.routes")
-
+const transactionRoutes = require("../src/routes/transaction.routes")
 /**
  * -Use Routes
  */
 app.use("/api/auth" , authRouter);
 app.use("/api/accounts" , accountRouter);
-
+app.use("/api/transactions" , transactionRoutes);
 
 //import the server instance (app)
  
