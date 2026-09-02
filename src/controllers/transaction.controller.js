@@ -113,5 +113,19 @@ async function createTransaction(req, res){
         idempotencyKey:idempotencyKey
     }], {session});
 
+    /**
+     * 6. Create DEBIT ledger entry
+     */
+    const debitLedgerEntry = await ledgerModel.create([{
+        account:fromUserAccount,
+        amount:amount,
+        transaction: transaction._id,
+        type:"DEBIT"
+    } ] , { session })
+
+    // await (() => {
+    //     return new Promise((resolve) => setTimeout(resolve, 15*1000));
+    // })();
+
 }
     }
