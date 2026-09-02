@@ -154,4 +154,17 @@ async function createTransaction(req, res){
             message: "Trasaction is Pending due to some issue, please retry after sometime"
         })
     }
-}
+
+    /**
+     * 9. Send email notification 
+     */
+    await emailService.sendTransactionEmail(
+        req.user.email,
+        req.user.name,
+        amount, 
+        toUserAccount
+    )
+
+   
+
+    }
