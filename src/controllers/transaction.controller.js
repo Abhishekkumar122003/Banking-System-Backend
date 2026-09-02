@@ -127,5 +127,16 @@ async function createTransaction(req, res){
     //     return new Promise((resolve) => setTimeout(resolve, 15*1000));
     // })();
 
-}
+        /**
+         * 7. Create CREDIT ledger entry
+         */
+
+    const creditLedgerEntry = await ledgerModel.create([{
+        account:toUserAccount,
+        amount,
+        transaction:transaction._id,
+        type:"CREDIT"
+    } ] , { session })
+    }
+
     }
