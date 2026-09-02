@@ -149,5 +149,9 @@ async function createTransaction(req, res){
      
     
 
+    }catch(error){
+        return res.status(400).json({
+            message: "Trasaction is Pending due to some issue, please retry after sometime"
+        })
     }
 }
