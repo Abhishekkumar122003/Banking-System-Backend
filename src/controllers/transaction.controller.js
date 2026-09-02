@@ -244,5 +244,6 @@ async function creteInitialFundsTransaction(req, res) {
     }
 
 module.exports = {
-    createTransaction
+    createTransaction,
+    creteInitialFundsTransaction
  }
