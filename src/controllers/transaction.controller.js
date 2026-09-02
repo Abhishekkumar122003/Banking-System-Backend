@@ -229,7 +229,12 @@ async function creteInitialFundsTransaction(req, res) {
         }],
         { session }
     )
+
+    transaction.status = "COMPLETED";
+    await transaction.save({ session });
+
     
+
     }
 
 module.exports = {
