@@ -137,6 +137,17 @@ async function createTransaction(req, res){
         transaction:transaction._id,
         type:"CREDIT"
     } ] , { session })
-    }
+
+     /**
+      * 8. Mark transaction COMPLETED
+      */
+     transaction.status="COMPLETED";
+     await transaction.save({ session });
+
+    await session.commitTransaction();
+    session.endSession();              //asked gpt about it
+     
+    
 
     }
+}
