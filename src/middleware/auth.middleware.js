@@ -19,7 +19,7 @@ async function authMiddleware(req, res, next){
 
     const isBlackListed = await tokenBlacklistModel.findOne({ token });
     if(isBlackListed){
-        return res.status(400).json({
+        return res.status(401).json({
             message: " Unaothorized access, token is invalid"
         })
     }
@@ -46,6 +46,13 @@ async function authSystemMiddleware(req, res, next){
             message: "Unathorized access, token is missing"
         })
     }
+
+     const isBlackListed = await tokenBlacklistModel.findOne({ token });
+       if(isBlackListed){
+        return res.status(401).json({
+            message: " Unaothorized access, token is invalid"
+        })
+       }
 
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
