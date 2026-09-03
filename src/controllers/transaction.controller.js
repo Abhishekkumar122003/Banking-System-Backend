@@ -142,9 +142,11 @@ async function createTransaction(req, res){
      /**
       * 8. Mark transaction COMPLETED
       */
-     transaction.status="COMPLETED";
-     await transaction.save({ session });
-
+     await transactionModel.findOneAndUpdate(
+        {_id:transaction._id},
+        {status: "COMPLETE"},
+        { session }
+     )
     await session.commitTransaction();
     session.endSession();              //asked gpt about it
      
