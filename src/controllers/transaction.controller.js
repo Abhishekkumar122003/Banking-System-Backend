@@ -106,13 +106,13 @@ async function createTransaction(req, res){
     const session = await mongoose.startSession();
         session.startTransaction();
     
-    transaction = await transactionModel.create([{
+    transaction = (await transactionModel.create([{
         fromAccount:fromUserAccount,
         toAccount:toUserAccount,
         status:"PENDIN",
         amount:amount,
         idempotencyKey:idempotencyKey
-    }], {session});
+    }], {session}))[0];
 
     /**
      * 6. Create DEBIT ledger entry
