@@ -20,6 +20,6 @@ const router = express.Router();
  * - GET all accounts of the logged-in user
  * - Protectes Route
  */
-router.get("/", authMiddleware.authMiddleware, accountController.)
+router.get("/", authMiddleware.authMiddleware, accountController.getUserAccountController);
 
 module.exports = router
