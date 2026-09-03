@@ -15,7 +15,8 @@ const mongoose = require("mongoose");
         *7. Create CREDIT ledger entry
         *8. Mark transaction COMPLETED
         *9. Send email notification 
- */
+       
+        */
 
 async function createTransaction(req, res){
 
@@ -174,7 +175,7 @@ async function createTransaction(req, res){
 
 async function creteInitialFundsTransaction(req, res) {
     const  {toAccount, amount, idempotencyKey} = req.body; 
-    
+    console.log(toAccount, " :hisfdverugj")
     if(!toAccount || !amount || !idempotencyKey){
         return res.status(400).json({
             message: "toAccount, amount and idempotencyKey are required"
@@ -190,27 +191,26 @@ async function creteInitialFundsTransaction(req, res) {
         })
     }
     const fromUSerAccount = await accountModel.findOne({        
-        systemUser: true,                                   // here we try to systemUSer account with the help of _id and with =>systenUser=true
+                                         // here we try to systemUSer account with the help of _id and with =>systenUser=true
         user: req.user._id
     });
 
     if(!fromUSerAccount){
         return res.status(400).json({
-            message: "System user account not found"
+            message: "System user account not foundscsc"
         })
     }
 
     const session = await mongoose.startSession();
         session.startTransaction();
     
-    const transaction = await transactionModel.create({
+    const transaction = new transactionModel({
             fromAccount:fromUSerAccount._id,
             toAccount,
             amount,
             idempotencyKey,
             status: "PENDING"
-            }, 
-            { session }
+            }
         )
     const debitLedgerEntry = await ledgerModel.create([{
         account:fromUSerAccount._id,
@@ -230,7 +230,7 @@ async function creteInitialFundsTransaction(req, res) {
         { session }
     )
 
-    transaction.status = "COMPLETED";
+    transaction.status = "COMPLETE";
     await transaction.save({ session });
 
     await session.commitTransaction();
