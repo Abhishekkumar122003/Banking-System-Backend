@@ -3,6 +3,8 @@ const accountModel = require("../models/account.model");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 const tokenBlacklistModel = require("../models/blackList.model");
+
+
 async function authMiddleware(req, res, next){
     const token = req.cookies.token || req.header.autherization?.split(" ")[1];
     
@@ -13,6 +15,13 @@ async function authMiddleware(req, res, next){
         return res.status(400).json({
             message: "Unautherized access, token is missing"
         });
+    }
+
+    const isBlackListed = await tokenBlacklistModel.findOne({ token });
+    if(isBlackListed){
+        return res.status(400).json({
+            message: " Unaothorized access, token is invalid"
+        })
     }
 
     try{/* - token is present */
