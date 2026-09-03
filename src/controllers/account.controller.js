@@ -22,6 +22,8 @@ async function getUserAccountController(req , res){
     })
 }
 
+as
+
  module.exports = {
     createAccountController,
     getUserAccountController

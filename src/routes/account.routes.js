@@ -22,4 +22,10 @@ const router = express.Router();
  */
 router.get("/", authMiddleware.authMiddleware, accountController.getUserAccountController);
 
+/**
+ * -GET /api/accounts/balance/:accountId
+ */
+router.get("/balance/:accountId", authMiddleware.authMiddleware, accountController.getAccountBalaceController)
+
+
 module.exports = router
